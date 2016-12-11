@@ -1,0 +1,46 @@
+<section>
+  <h1>RETRIEVE YOUR BOOKING</h1>
+  <p>
+    You can find your booking by filling out your family name and the booking
+    code in your booking confirmation
+  </p>
+
+  <form novalidate (ngSubmit)="onSubmit(booking)" [formGroup]="booking">
+    <label>
+      <span>Booking code</span>
+      <input type="text" placeholder="Booking code" formControlName="code">
+    </label>
+
+    <div class="error" *ngIf="isCodeEmpty">
+      Code is required!
+    </div>
+
+    <div class="error" *ngIf="!isCodeEmpty && !isCodeInvalid && isCodeOutsideLimits">
+      Code length must be between 5 to 6 characters!
+    </div>
+
+    <div class="error" *ngIf="!isCodeEmpty && isCodeInvalid">
+      Code must contain only letters and number!
+    </div>
+
+
+    <label>
+      <span>Family name</span>
+      <input type="text" placeholder="Family name" formControlName="name">
+    </label>
+
+    <div class="error" *ngIf="isNameEmpty">
+      Name family is required!
+    </div>
+
+    <div class="error" *ngIf="!isNameEmpty && !isNameInvalid && isNameOutsideLimits">
+      Name family length must be between 2 to 30 characters!
+    </div>
+
+    <div class="error" *ngIf="!isNameEmpty && isNameInvalid">
+      Name family must contain only letters!
+    </div>
+
+    <input type="submit" [disabled]="booking.invalid" value="Retrieve booking">
+  </form>
+</section>
