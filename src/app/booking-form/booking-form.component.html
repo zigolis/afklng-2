@@ -1,46 +1,38 @@
+<header>Check-in</header>
 <section>
-  <h1>RETRIEVE YOUR BOOKING</h1>
-  <p>
-    You can find your booking by filling out your family name and the booking
-    code in your booking confirmation
-  </p>
+    <h2 class="title">Retrieve your booking</h2>
+    <p class="introduction">
+      You can find your booking by filling out your family name and the booking code in your booking confirmation
+    </p>
 
-  <form novalidate (ngSubmit)="onSubmit(booking)" [formGroup]="booking">
-    <label>
-      <span>Booking code</span>
-      <input type="text" placeholder="Booking code" formControlName="code">
-    </label>
+    <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
+        <label class="input-group input-code" [class.invalid]="booking.controls.name.touched && booking.controls.code.invalid">
+            <span>Booking code</span>
+            <input type="text" name="code" id="code" formControlName="code" tabindex="1" />
 
-    <div class="error" *ngIf="isCodeEmpty">
-      Code is required!
-    </div>
+            <div class="form-error-wrapper">
+                <div class="form-error" *ngIf="isCodeEmpty">Code is required</div>
+                <div class="form-error" *ngIf="isCodeOutOfBounds">Code must have 5 to 6 characters</div>
+                <div class="form-error" *ngIf="isCodeInvalid">Code must have only letters and numbers</div>
+            </div>
+        </label>
 
-    <div class="error" *ngIf="!isCodeEmpty && !isCodeInvalid && isCodeOutsideLimits">
-      Code length must be between 5 to 6 characters!
-    </div>
+        <label class="input-group" [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
+            <span>Family name</span>
+            <input type="text" name="name" id="name" formControlName="name" tabindex="2" />
 
-    <div class="error" *ngIf="!isCodeEmpty && isCodeInvalid">
-      Code must contain only letters and number!
-    </div>
+            <div class="form-error-wrapper">
+                <div class="form-error" *ngIf="isNameEmpty">Name is required</div>
+                <div class="form-error" *ngIf="isNameOutOfBounds">Name length must be between 2 and 30</div>
+                <div class="form-error" *ngIf="isNameInvalid">Only letters allowed</div>
+            </div>
+        </label>
 
+        <div class="btn-wrapper">
+            <input type="submit" tabindex="3" value="Retrieve booking" [disabled]="booking.invalid" />
+        </div>
 
-    <label>
-      <span>Family name</span>
-      <input type="text" placeholder="Family name" formControlName="name">
-    </label>
-
-    <div class="error" *ngIf="isNameEmpty">
-      Name family is required!
-    </div>
-
-    <div class="error" *ngIf="!isNameEmpty && !isNameInvalid && isNameOutsideLimits">
-      Name family length must be between 2 to 30 characters!
-    </div>
-
-    <div class="error" *ngIf="!isNameEmpty && isNameInvalid">
-      Name family must contain only letters!
-    </div>
-
-    <input type="submit" [disabled]="booking.invalid" value="Retrieve booking">
-  </form>
+        <pre>{{ bookingDetails | json }}</pre>
+        <pre>{{ apiError | json }}</pre>
+    </form>
 </section>
