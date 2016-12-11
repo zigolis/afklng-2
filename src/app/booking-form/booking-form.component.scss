@@ -1,0 +1,132 @@
+$color-primary: #003145;
+$color-danger: #d40504;
+$color-grey: #767676;
+$color-heading: $color-primary;
+$border-default: $color-primary;
+$btn-primary-color: white;
+$btn-primary-bg: $color-danger;
+$input-border: $color-grey;
+$spacing-vertical: 30px;
+$font-size-default: 16px;
+$font-size-input: 18px;
+$font-size-label: 18px;
+
+// excellence in motion
+app-booking-form {
+    position: relative;
+    height: 100%;
+    display: block;
+
+    header {
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+        padding: $spacing-vertical;
+        font-size: 20px;
+        background: url(assets/bg.png);
+        background-size: cover;
+    }
+
+    section {
+        padding: $spacing-vertical 40px;
+        margin: 2em auto;
+        max-width: 450px;
+        border: 1px solid $border-default;
+        color: $color-primary;
+
+        @media (max-height: 799px) {
+            margin: 30px auto;
+        }
+
+        @media (min-height: 800px) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .title {
+        text-transform: uppercase;
+        font-size: 40px;
+        text-align: center;
+        margin-bottom: $spacing-vertical;
+
+        &:after {
+            content: "";
+            display: block;
+            width: 25px;
+            height: 4px;
+            margin: $spacing-vertical auto 0;
+            background-color: $color-primary;
+        }
+    }
+
+    .introduction {
+        font-size: $font-size-input;
+        font-weight: 300;
+        margin-bottom: $spacing-vertical;
+    }
+
+    input {
+        font-size: $font-size-input;
+    }
+
+    input[type="submit"] {
+        background-color: $btn-primary-bg;
+        color: $btn-primary-color;
+        padding: 15px 30px;
+        border-radius: 2px;
+        border: 0;
+        font-size: $font-size-input;
+
+        &[disabled] {
+            background-color: darken($input-border, 1%);
+            color: lighten($btn-primary-color, 6%);
+        }
+    }
+
+    input[type="text"] {
+        padding: 12px 15px;
+        border: 1px solid $input-border;
+        background-color: white;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .input-group {
+        display: block;
+
+        span {
+            display: block;
+            font-size: $font-size-label;
+            font-weight: 500;
+            padding-bottom: 15px;
+        }
+
+        &.invalid {
+            color: $color-danger;
+            input { border-color: $color-danger; }
+        }
+    }
+
+    .input-code input {
+        text-transform: uppercase;
+    }
+
+    .btn-wrapper {
+        padding: 30px 0 0;
+        text-align: center;
+    }
+
+    .form-error-wrapper {
+        height: 50px;
+    }
+
+    .form-error {
+        padding: 10px 1em;
+        border-left: 2px solid $color-danger;
+        color: darken($color-danger, 5%);
+        background-color: lighten($color-danger, 50%);
+    }
+}
