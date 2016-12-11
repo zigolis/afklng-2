@@ -39,6 +39,10 @@ export class BookingFormComponent implements OnInit {
             .catch(e => this.apiError = e);
     }
 
+    onGoBack() {
+        this.bookingDetails = null;
+    }
+
     get isCodeEmpty():boolean {
         const code = this.booking.get('code');
         return code.hasError('required') && code.touched;

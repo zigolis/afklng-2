@@ -1,5 +1,5 @@
 <header>Check-in</header>
-<section>
+<section class="check-in">
     <h2 class="title">Retrieve your booking</h2>
     <p class="introduction">
       You can find your booking by filling out your family name and the booking code in your booking confirmation
@@ -8,7 +8,7 @@
     <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
         <label class="input-group input-code" [class.invalid]="booking.controls.name.touched && booking.controls.code.invalid">
             <span>Booking code</span>
-            <input type="text" name="code" id="code" formControlName="code" tabindex="1" />
+            <input type="text" name="code" formControlName="code" tabindex="1" />
 
             <div class="form-error-wrapper">
                 <div class="form-error" *ngIf="isCodeEmpty">Code is required</div>
@@ -19,7 +19,7 @@
 
         <label class="input-group" [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
             <span>Family name</span>
-            <input type="text" name="name" id="name" formControlName="name" tabindex="2" />
+            <input type="text" name="name" formControlName="name" tabindex="2" />
 
             <div class="form-error-wrapper">
                 <div class="form-error" *ngIf="isNameEmpty">Name is required</div>
@@ -29,10 +29,16 @@
         </label>
 
         <div class="btn-wrapper">
-            <input type="submit" tabindex="3" value="Retrieve booking" [disabled]="booking.invalid" />
+            <input type="submit" class="btn-primary" tabindex="3" value="Retrieve booking" [disabled]="booking.invalid" />
         </div>
-
-        <pre>{{ bookingDetails | json }}</pre>
-        <pre>{{ apiError | json }}</pre>
     </form>
+
+    <div class="result" [class.show]="!!bookingDetails">
+      <pre>{{ bookingDetails | json }}</pre>
+      <pre>{{ apiError | json }}</pre>
+
+      <div class="btn-wrapper">
+        <button type="button" class="btn-primary" tabindex="4" (click)="onGoBack()">Go back</button>
+      </div>
+    </div>
 </section>

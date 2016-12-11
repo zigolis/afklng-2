@@ -27,22 +27,51 @@ app-booking-form {
         background-size: cover;
     }
 
-    section {
+    .check-in {
         padding: $spacing-vertical 40px;
+        position: relative;
         margin: 2em auto;
         max-width: 450px;
         border: 1px solid $border-default;
         color: $color-primary;
 
         @media (max-height: 799px) {
-            margin: 30px auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
-        @media (min-height: 800px) {
+        @media (max-width: 479px) {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        @media (min-width: 800px) and (min-height: 840px) {
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            margin: 0;
+        }
+
+        @media (min-width: 480px) {
+            max-width: 450px;
+        }
+    }
+
+    .result {
+        background: #fff;
+        position: absolute;
+        z-index: 2;
+        top: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+
+        transition: top .4s ease-in-out;
+
+        &.show {
+            top: 0;
         }
     }
 
@@ -63,16 +92,18 @@ app-booking-form {
     }
 
     .introduction {
-        font-size: $font-size-input;
+        font-size: 20px;
         font-weight: 300;
         margin-bottom: $spacing-vertical;
+        line-height: 30px;
+        text-align: justify;
     }
 
     input {
         font-size: $font-size-input;
     }
 
-    input[type="submit"] {
+    .btn-primary {
         background-color: $btn-primary-bg;
         color: $btn-primary-color;
         padding: 15px 30px;
