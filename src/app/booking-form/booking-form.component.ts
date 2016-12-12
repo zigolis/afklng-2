@@ -20,12 +20,13 @@ export class BookingFormComponent implements OnInit {
 
     ngOnInit() {
         const required = Validators.required;
-        const codeMinLength = Validators.minLength(5);
-        const codeMaxLength = Validators.minLength(6);
         const lettersAndNumbers = Validators.pattern('[A-Za-z0-9]+');
         const lettersOnly = Validators.pattern('[A-Za-z]+');
+        const codeMinLength = Validators.minLength(5);
+        const codeMaxLength = Validators.maxLength(6);
         const nameMinLength = Validators.minLength(2);
         const nameMaxLength = Validators.maxLength(30);
+
         this.booking = this.fb.group({
             code: ['', [required, codeMinLength, codeMaxLength, lettersAndNumbers]],
             name: ['', [required, nameMinLength, nameMaxLength, lettersOnly]]
@@ -41,44 +42,42 @@ export class BookingFormComponent implements OnInit {
 
     onGoBack() {
         this.bookingDetails = null;
+        this.onReset();
+    }
+
+    onReset() {
+      this.booking.reset();
     }
 
     get isCodeEmpty():boolean {
         const code = this.booking.get('code');
-        return code.hasError('required') && code.touched;
+        return code.touched && code.hasError('required');
     }
 
     get isCodeInvalid():boolean {
         const code = this.booking.get('code');
-        return !this.isCodeEmpty &&
-            code.touched &&
-            code.hasError('required');
+        return code.touched && !this.isCodeEmpty && code.hasError('pattern');
     }
 
     get isCodeOutOfBounds():boolean {
         const code = this.booking.get('code');
-        return !this.isCodeEmpty &&
-            !this.isCodeInvalid &&
-            code.touched &&
+        return code.touched && !this.isCodeEmpty && !this.isCodeInvalid &&
             (code.hasError('minlength') || code.hasError('maxlength'))
     }
 
     get isNameEmpty():boolean {
         const name = this.booking.get('name');
-        return name.touched &&
-            name.hasError('required');
+        return this.booking.touched && name.hasError('required');
     }
 
     get isNameInvalid():boolean {
         const name = this.booking.get('name');
-        return !this.isNameEmpty &&
-            name.hasError('pattern');
+        return this.booking.touched && !this.isNameEmpty && name.hasError('pattern');
     }
 
     get isNameOutOfBounds():boolean {
         const name = this.booking.get('name');
-        return !this.isNameEmpty &&
-            !this.isNameInvalid &&
+        return this.booking.touched && !this.isNameEmpty && !this.isNameInvalid &&
             (name.hasError('minlength') || name.hasError('maxlength'))
     }
 }

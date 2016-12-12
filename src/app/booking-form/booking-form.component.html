@@ -1,4 +1,5 @@
-<header>Check-in</header>
+<header class="header-check-in">Check-in</header>
+
 <section class="check-in">
     <h2 class="title">Retrieve your booking</h2>
     <p class="introduction">
@@ -6,7 +7,7 @@
     </p>
 
     <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
-        <label class="input-group input-code" [class.invalid]="booking.controls.name.touched && booking.controls.code.invalid">
+        <label class="input-group input-code" [class.invalid]="booking.controls.code.touched && booking.controls.code.invalid">
             <span>Booking code</span>
             <input type="text" name="code" formControlName="code" tabindex="1" />
 
@@ -33,9 +34,72 @@
         </div>
     </form>
 
-    <div class="result" [class.show]="!!bookingDetails">
-      <pre>{{ bookingDetails | json }}</pre>
-      <pre>{{ apiError | json }}</pre>
+    <div class="result" [class.show]="bookingDetails || apiError">
+      <header class="result-header"></header>
+      <section *ngIf="bookingDetails">
+        <h2>
+          <span>{{bookingDetails.origin}}</span>
+          <span>-</span>
+          <span>{{bookingDetails.destination}}</span>
+        </h2>
+
+        <div class="row">
+          <label class="result-flight block">
+              <span>Passenger</span>
+              <h3>
+                {{bookingDetails.title}}
+                {{bookingDetails.firstName}}
+                {{bookingDetails.lastName}}
+              </h3>
+          </label>
+        </div>
+
+        <div class="row row-3">
+          <label class="result-flight">
+              <span>Flight</span>
+              <h4>
+                {{bookingDetails.flight}}
+              </h4>
+          </label>
+          <label class="result-flight">
+              <span>Gate</span>
+              <h4>
+                {{bookingDetails.gate || '-'}}
+              </h4>
+          </label>
+          <label class="result-flight">
+              <span>Boarding</span>
+              <h4>
+                {{bookingDetails.boarding | date:'HH:MM a'}}
+              </h4>
+          </label>
+        </div>
+
+        <div class="row row-3">
+          <label class="result-flight">
+              <span>SEAT</span>
+              <h4>
+                {{bookingDetails.seat}}
+              </h4>
+          </label>
+          <label class="result-flight">
+              <span>Cabin</span>
+              <h4>
+                {{bookingDetails.cabin}}
+              </h4>
+          </label>
+          <label class="result-flight">
+              <span>Departs</span>
+              <h4>
+                {{bookingDetails.departs | date:'HH:MM a'}}
+              </h4>
+          </label>
+        </div>
+      </section>
+
+      <section *ngIf="apiError">
+        <pre>{{ apiError | json }}</pre>
+      </section>
 
       <div class="btn-wrapper">
         <button type="button" class="btn-primary" tabindex="4" (click)="onGoBack()">Go back</button>
