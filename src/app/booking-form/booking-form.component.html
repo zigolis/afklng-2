@@ -1,131 +1,131 @@
 <header class="header-check-in">Check-in</header>
 
 <section class="check-in">
-    <h2 class="title">Retrieve your booking</h2>
-    <p class="introduction">
-      You can find your booking by filling out your family name and the booking code in your booking confirmation
-    </p>
+  <h2 class="title">Retrieve your booking</h2>
+  <p class="introduction">
+    You can find your booking by filling out your family name and the booking code in your booking confirmation
+  </p>
 
-    <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
-        <label
-            class="input-group input-code"
-            [class.invalid]="booking.controls.code.touched && booking.controls.code.invalid">
+  <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
+    <label
+      class="input-group input-code"
+      [class.invalid]="booking.controls.code.touched && booking.controls.code.invalid">
 
-            <span>Booking code</span>
-            <input type="text" name="code" formControlName="code" tabindex="1" />
+      <span>Booking code</span>
+      <input type="text" name="code" formControlName="code" tabindex="1" />
 
-            <div class="form-error-wrapper">
-                <div class="form-error" *ngIf="isCodeEmpty && booking.controls.code.touched">
-                  Code is required
-                </div>
-                <div class="form-error" *ngIf="isCodeOutOfBounds">
-                  Code must have 5 to 6 characters
-                </div>
-                <div class="form-error" *ngIf="isCodeInvalid">
-                  Code must have letters & numbers from 2 to 9
-                </div>
-            </div>
-        </label>
-
-        <label
-            class="input-group"
-            [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
-
-            <span>Family name</span>
-            <input type="text" name="name" formControlName="name" tabindex="2" />
-
-            <div class="form-error-wrapper">
-                <div class="form-error" *ngIf="isNameEmpty && booking.controls.name.touched">
-                  Name is required
-                </div>
-                <div class="form-error" *ngIf="isNameOutOfBounds">
-                  Name length must be between 2 and 30
-                </div>
-                <div class="form-error" *ngIf="isNameInvalid">
-                  Only letters allowed
-                </div>
-            </div>
-        </label>
-
-        <div class="btn-wrapper">
-            <input
-                type="submit"
-                class="btn-primary"
-                tabindex="3"
-                value="Retrieve booking"
-                [disabled]="booking.invalid" />
+      <div class="form-error-wrapper">
+        <div class="form-error" *ngIf="isCodeEmpty && booking.controls.code.touched">
+          Code is required
         </div>
-    </form>
-
-    <div class="result" [class.show]="bookingDetails || apiError">
-      <header class="result-header"></header>
-      <section *ngIf="bookingDetails">
-        <h2>
-          <span>{{bookingDetails.origin}}</span>
-          <span>-</span>
-          <span>{{bookingDetails.destination}}</span>
-        </h2>
-
-        <div class="row">
-          <label class="result-flight block">
-              <span>Passenger</span>
-              <h3>
-                {{bookingDetails.title}}
-                {{bookingDetails.firstName}}
-                {{bookingDetails.lastName}}
-              </h3>
-          </label>
+        <div class="form-error" *ngIf="isCodeOutOfBounds">
+          Code must have 5 to 6 characters
         </div>
-
-        <div class="row row-3">
-          <label class="result-flight">
-              <span>Flight</span>
-              <h4>
-                {{bookingDetails.flight}}
-              </h4>
-          </label>
-          <label class="result-flight">
-              <span>Gate</span>
-              <h4>
-                {{bookingDetails.gate || '-'}}
-              </h4>
-          </label>
-          <label class="result-flight">
-              <span>Boarding</span>
-              <h4>
-                {{bookingDetails.boarding | date:'HH:MM a'}}
-              </h4>
-          </label>
+        <div class="form-error" *ngIf="isCodeInvalid">
+          Code must have letters & numbers from 2 to 9
         </div>
-
-        <div class="row row-3">
-          <label class="result-flight">
-              <span>SEAT</span>
-              <h4>
-                {{bookingDetails.seat}}
-              </h4>
-          </label>
-          <label class="result-flight">
-              <span>Cabin</span>
-              <h4>
-                {{bookingDetails.cabin}}
-              </h4>
-          </label>
-          <label class="result-flight">
-              <span>Departs</span>
-              <h4>
-                {{bookingDetails.departs | date:'HH:MM a'}}
-              </h4>
-          </label>
-        </div>
-      </section>
-
-      <section *ngIf="apiError">
-        <pre>{{ apiError | json }}</pre>
-      </section>
-
-      <div class="btn-wrapper">
-        <button type="button" class="btn-primary" tabindex="4" (click)="onGoBack()">Go back</button>
       </div>
+    </label>
+
+    <label
+      class="input-group"
+      [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
+
+      <span>Family name</span>
+      <input type="text" name="name" formControlName="name" tabindex="2" />
+
+      <div class="form-error-wrapper">
+        <div class="form-error" *ngIf="isNameEmpty && booking.controls.name.touched">
+          Name is required
+        </div>
+        <div class="form-error" *ngIf="isNameOutOfBounds">
+          Name length must be between 2 and 30
+        </div>
+        <div class="form-error" *ngIf="isNameInvalid">
+          Only letters allowed
+        </div>
+      </div>
+    </label>
+
+    <div class="btn-wrapper">
+      <input
+        type="submit"
+        class="btn-primary"
+        tabindex="3"
+        value="Retrieve booking"
+        [disabled]="booking.invalid" />
     </div>
+  </form>
+
+  <div class="result" [class.show]="bookingDetails || apiError">
+    <header class="result-header"></header>
+    <section *ngIf="bookingDetails">
+      <h2>
+        <span>{{bookingDetails.origin}}</span>
+        <span>-</span>
+        <span>{{bookingDetails.destination}}</span>
+      </h2>
+
+      <div class="row">
+        <label class="result-flight block">
+          <span>Passenger</span>
+          <h3>
+            {{bookingDetails.title}}
+            {{bookingDetails.firstName}}
+            {{bookingDetails.lastName}}
+          </h3>
+        </label>
+      </div>
+
+      <div class="row row-3">
+        <label class="result-flight">
+          <span>Flight</span>
+          <h4>
+            {{bookingDetails.flight}}
+          </h4>
+        </label>
+        <label class="result-flight">
+          <span>Gate</span>
+          <h4>
+            {{bookingDetails.gate || '-'}}
+          </h4>
+        </label>
+        <label class="result-flight">
+          <span>Boarding</span>
+          <h4>
+            {{bookingDetails.boarding | date:'HH:MM a'}}
+          </h4>
+        </label>
+      </div>
+
+      <div class="row row-3">
+        <label class="result-flight">
+          <span>SEAT</span>
+          <h4>
+            {{bookingDetails.seat}}
+          </h4>
+        </label>
+        <label class="result-flight">
+          <span>Cabin</span>
+          <h4>
+            {{bookingDetails.cabin}}
+          </h4>
+        </label>
+        <label class="result-flight">
+          <span>Departs</span>
+          <h4>
+            {{bookingDetails.departs | date:'HH:MM a'}}
+          </h4>
+        </label>
+      </div>
+    </section>
+
+    <section *ngIf="apiError">
+      <pre>{{ apiError | json }}</pre>
+    </section>
+
+    <div class="btn-wrapper">
+      <button type="button" class="btn-primary" tabindex="4" (click)="onGoBack()">Go back</button>
+    </div>
+  </div>
 </section>
