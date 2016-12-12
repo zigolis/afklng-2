@@ -7,30 +7,53 @@
     </p>
 
     <form novalidate [formGroup]="booking" (ngSubmit)="onSubmit(booking)">
-        <label class="input-group input-code" [class.invalid]="booking.controls.code.touched && booking.controls.code.invalid">
+        <label
+            class="input-group input-code"
+            [class.invalid]="booking.controls.code.touched && booking.controls.code.invalid">
+
             <span>Booking code</span>
             <input type="text" name="code" formControlName="code" tabindex="1" />
 
             <div class="form-error-wrapper">
-                <div class="form-error" *ngIf="isCodeEmpty">Code is required</div>
-                <div class="form-error" *ngIf="isCodeOutOfBounds">Code must have 5 to 6 characters</div>
-                <div class="form-error" *ngIf="isCodeInvalid">Code must have only letters and numbers</div>
+                <div class="form-error" *ngIf="isCodeEmpty && booking.controls.code.touched">
+                  Code is required
+                </div>
+                <div class="form-error" *ngIf="isCodeOutOfBounds">
+                  Code must have 5 to 6 characters
+                </div>
+                <div class="form-error" *ngIf="isCodeInvalid">
+                  Code must have letters & numbers from 2 to 9
+                </div>
             </div>
         </label>
 
-        <label class="input-group" [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
+        <label
+            class="input-group"
+            [class.invalid]="booking.controls.name.touched && booking.controls.name.invalid">
+
             <span>Family name</span>
             <input type="text" name="name" formControlName="name" tabindex="2" />
 
             <div class="form-error-wrapper">
-                <div class="form-error" *ngIf="isNameEmpty">Name is required</div>
-                <div class="form-error" *ngIf="isNameOutOfBounds">Name length must be between 2 and 30</div>
-                <div class="form-error" *ngIf="isNameInvalid">Only letters allowed</div>
+                <div class="form-error" *ngIf="isNameEmpty && booking.controls.name.touched">
+                  Name is required
+                </div>
+                <div class="form-error" *ngIf="isNameOutOfBounds">
+                  Name length must be between 2 and 30
+                </div>
+                <div class="form-error" *ngIf="isNameInvalid">
+                  Only letters allowed
+                </div>
             </div>
         </label>
 
         <div class="btn-wrapper">
-            <input type="submit" class="btn-primary" tabindex="3" value="Retrieve booking" [disabled]="booking.invalid" />
+            <input
+                type="submit"
+                class="btn-primary"
+                tabindex="3"
+                value="Retrieve booking"
+                [disabled]="booking.invalid" />
         </div>
     </form>
 

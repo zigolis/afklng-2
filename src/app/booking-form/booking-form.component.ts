@@ -20,8 +20,8 @@ export class BookingFormComponent implements OnInit {
 
     ngOnInit() {
         const required = Validators.required;
-        const lettersAndNumbers = Validators.pattern('[A-Za-z0-9]+');
-        const lettersOnly = Validators.pattern('[A-Za-z]+');
+        const lettersAndNumbers = Validators.pattern('^[A-Za-z[2-9]+$');
+        const lettersOnly = Validators.pattern('^[A-Za-z]+$');
         const codeMinLength = Validators.minLength(5);
         const codeMaxLength = Validators.maxLength(6);
         const nameMinLength = Validators.minLength(2);
