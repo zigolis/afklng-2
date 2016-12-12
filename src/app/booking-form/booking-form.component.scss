@@ -17,8 +17,8 @@ app-booking-form {
     height: 100%;
     display: block;
 
-    header {
-        color: white;
+    .header-check-in {
+        color: #fff;
         text-transform: uppercase;
         text-align: center;
         padding: $spacing-vertical;
@@ -59,6 +59,8 @@ app-booking-form {
     }
 
     .result {
+        font-family: 'Helvetica Neue', roboto, sans-serif;
+        font-weight: 100;
         background: #fff;
         position: absolute;
         z-index: 2;
@@ -67,12 +69,70 @@ app-booking-form {
         right: 0;
         bottom: 0;
         overflow: auto;
-
-        transition: top .4s ease-in-out;
+        transition: top .7s cubic-bezier(0.96, 0.01, 0.42, 1.18);
 
         &.show {
             top: 0;
         }
+
+        .row {
+            border-bottom: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 40px 20px 15px;
+            font-weight: 100;
+            font-size: 60px;
+        }
+
+        .btn-primary {
+            width: 90%;
+            margin-top: 75px;
+        }
+    }
+
+    .row-3 {
+        clear: both;
+        overflow: auto;
+
+        .result-flight {
+            float: left;
+            width: 33%;
+        }
+    }
+
+    .result-flight {
+        span {
+            font-size: 17px;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 30px;
+            font-weight: 200;
+        }
+
+        h4 {
+            font-size: 27px;
+            font-weight: 200;
+        }
+
+        @media (max-width: 479px) {
+            h4 {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .result-header {
+        background: url(assets/brand.png);
+        background-repeat: no-repeat;
+        background-position: center 22px;
+        border-bottom: 1px solid #767676;
+        height: 60px;
     }
 
     .title {
@@ -88,6 +148,12 @@ app-booking-form {
             height: 4px;
             margin: $spacing-vertical auto 0;
             background-color: $color-primary;
+        }
+    }
+
+    @media (max-width: 479px) {
+        .title {
+            font-size: 30px;
         }
     }
 
@@ -110,6 +176,11 @@ app-booking-form {
         border-radius: 2px;
         border: 0;
         font-size: $font-size-input;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .7;
+        }
 
         &[disabled] {
             background-color: darken($input-border, 1%);
