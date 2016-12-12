@@ -1,31 +1,35 @@
-# Klm
+# AFKLng-2x
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
+## Requirements
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+These are the basic requirements for your application:
 
-## Code scaffolding
+* ```node``` v5.8.0+
+* ```npm```  v3.7.3+
+* ```angular-cli```  v1.0.0-beta.22-1
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
-## Build
+## Instalation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+First of all, clone this repository:
 
-## Running unit tests
+	git clone git@github.com:zigolis/afklng-2.git
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+After that, enter to the folder $ cd afklng-2 and install the dependencies:
 
-## Running end-to-end tests
+	npm install
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+To build and start the application run the npm start script
 
-## Deploying to Github Pages
+	npm start
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+And finally set the node / proxy server up running
 
-## Further help
+	npm run mock
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If you want to run the end to end tests, you only need to call npm test
+
+	npm test
+
+
+Your app should be running on ```http://localhost:4200/``` and the mock server on ```http://localhost:3000/api/booking/code/name```
